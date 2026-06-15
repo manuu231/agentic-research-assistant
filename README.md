@@ -1,132 +1,217 @@
-# 🤖 Multi-Agent Research Assistant
+# 🤖 Agentic Research Assistant
 
-A production-style **agentic AI pipeline** built with **LangGraph** and **HuggingFace Inference API** (Mistral-7B). Four specialized agents collaborate in a directed graph to take any research topic from raw question to polished final report — with no human in the loop.
+An intelligent AI research assistant powered by **Google Gemini**, **LangChain**, and **Gradio** that can autonomously reason, search, analyze, and generate detailed responses to user queries.
+
+This project demonstrates modern **Agentic AI workflows**, combining large language models with external tools and conversational memory to create a research-oriented AI assistant.
 
 ---
 
-## Architecture
+## 🚀 Features
 
+### 🧠 Agentic AI Reasoning
+- Multi-step problem solving
+- Tool-augmented reasoning
+- Context-aware responses
+
+### 🔍 Intelligent Research
+- Web information retrieval
+- Knowledge synthesis
+- Detailed answer generation
+
+### 💬 Conversational Memory
+- Maintains chat history
+- Supports follow-up questions
+- Multi-turn interactions
+
+### ⚡ Gemini Integration
+- Powered by Google Gemini
+- Fast response generation
+- Advanced reasoning capabilities
+
+### 🎨 Interactive Interface
+- User-friendly Gradio application
+- Real-time responses
+- Easy deployment on Hugging Face Spaces
+
+---
+
+## 🏗️ System Architecture
+
+```text
+User Query
+     │
+     ▼
+Agent Executor
+     │
+     ├── Memory
+     │
+     ├── Gemini LLM
+     │
+     └── Tools
+            │
+            ├── Research
+            ├── Retrieval
+            └── Knowledge Sources
+                    │
+                    ▼
+            Final Response
 ```
-User Topic
-    │
-    ▼
-┌─────────┐     ┌────────────┐     ┌────────────┐     ┌────────┐
-│ Planner │────▶│ Researcher │────▶│ Summarizer │────▶│ Critic │──▶ Final Output
-└─────────┘     └────────────┘     └────────────┘     └────────┘
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|-----------|------------|
+| Language | Python |
+| LLM | Google Gemini |
+| Framework | LangChain |
+| Interface | Gradio |
+| Agent Framework | LangChain Agents |
+| Memory | Conversation Buffer Memory |
+| Deployment | Hugging Face Spaces |
+
+---
+
+## 📂 Project Structure
+
+```text
+Agentic-Research-Assistant/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+└── assets/
 ```
 
-| Agent | Role |
-|---|---|
-| **Planner** | Decomposes the topic into a structured 3-step research plan |
-| **Researcher** | Executes the plan and produces detailed, bullet-pointed findings |
-| **Summarizer** | Distills findings into 3-4 professional paragraphs |
-| **Critic** | Reviews, critiques, and rewrites a final polished version |
-
-All agents share a typed `AgentState` object passed through the LangGraph graph. Each node reads from and writes to state — no side effects, fully reproducible.
-
 ---
 
-## Tech Stack
+## ⚙️ Installation
 
-- **[LangGraph](https://github.com/langchain-ai/langgraph)** — stateful multi-agent orchestration
-- **[HuggingFace Inference API](https://huggingface.co/inference-api)** — zero-cost LLM backend (Mistral-7B-Instruct)
-- **[LangChain](https://github.com/langchain-ai/langchain)** — prompt management and LLM abstraction
-- **[FastAPI](https://fastapi.tiangolo.com/)** — REST API serving the pipeline
-
----
-
-## Quickstart
-
-### 1. Clone & install
+### Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/agentic-research-assistant.git
+git clone https://github.com/yourusername/agentic-research-assistant.git
+
 cd agentic-research-assistant
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Set your HuggingFace token
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file:
+
+```env
+GOOGLE_API_KEY=your_google_gemini_api_key
+```
+
+---
+
+## ▶️ Run Locally
 
 ```bash
-export HF_TOKEN=hf_your_token_here
+python app.py
 ```
 
-Get a free token at [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
-
-### 3. Run the agent directly
-
-```bash
-python agent.py
-```
-
-Output is printed step-by-step and saved to `output.json`.
-
-### 4. Run the API server
-
-```bash
-uvicorn app:app --reload
-```
-
-Then open [http://localhost:8000/docs](http://localhost:8000/docs) for the interactive Swagger UI.
-
-**Example request:**
-
-```bash
-curl -X POST http://localhost:8000/research \
-  -H "Content-Type: application/json" \
-  -d '{"topic": "The impact of LLMs on software engineering productivity"}'
-```
+The Gradio interface will launch locally in your browser.
 
 ---
 
-## Sample Output
+## 💡 Example Queries
 
-**Topic:** *The impact of large language models on software engineering productivity*
-
-```
-[Planner]   1. Review empirical studies on LLM-assisted coding...
-            2. Analyze productivity metrics from GitHub Copilot adoption...
-            3. Identify risks: over-reliance, hallucinations, security...
-
-[Researcher] • Studies show 30–55% faster task completion with AI pair programmers...
-             • Code review time reduced by ~40% in enterprise settings...
-
-[Summarizer] Large language models have meaningfully accelerated software development...
-
-[Critic]    CRITIQUE: The summary lacks nuance on security trade-offs...
-            FINAL VERSION: LLMs represent a step-change in developer productivity...
-```
+- Explain Retrieval-Augmented Generation (RAG).
+- What are AI Agents and how do they work?
+- Compare Gemini and GPT models.
+- Explain Reinforcement Learning in simple terms.
+- Summarize recent advancements in Agentic AI.
 
 ---
 
-## Key Concepts Demonstrated
+## 🎯 Skills Demonstrated
 
-- **Stateful multi-agent graphs** with typed shared state (`TypedDict`)
-- **LangGraph directed edges** — deterministic agent sequencing
-- **HuggingFace Inference API** as a zero-cost LLM backend
-- **FastAPI** deployment with Pydantic request/response validation
-- **Agent memory** — each node reads the full accumulated state
-- **Separation of concerns** — one agent, one responsibility
+This project showcases:
 
----
-
-## Extending This Project
-
-- Add a **web search tool** via `langchain_community.tools.TavilySearchResults`
-- Add **conditional edges** in LangGraph to loop the Critic back to Researcher if quality is low
-- Swap Mistral-7B for **Llama 3** or any other HuggingFace model with one line change
-- Add **MLflow tracking** to log each agent's output per run
-- Wrap in **Docker** for portable deployment
+- Agentic AI Development
+- LangChain Framework
+- LLM Integration
+- Conversational AI
+- Prompt Engineering
+- Tool Calling
+- AI Application Deployment
+- Python Development
 
 ---
 
-## Author
+## 🔮 Future Enhancements
 
-**Manpreet Kaur** — LLM / GenAI Engineer  
-[LinkedIn](https://linkedin.com/in/manpreetkaurmahal) · [HuggingFace](https://huggingface.co/Manpreet02) · [GitHub](https://github.com/manuu231)
+- Multi-Agent Collaboration
+- RAG Integration
+- Vector Database Support
+- PDF Research Assistant
+- Long-Term Memory
+- Source Citations
+- LangGraph Workflow Support
 
 ---
 
-## License
+## 📸 Demo
 
-MIT
+<img width="900" alt="demo" src="demo.png">
+
+---
+
+## 👩‍💻 Author
+
+### Manpreet Kaur Mahal
+
+AI/ML Engineer | Generative AI | LLM Applications | Agentic AI
+
+**Skills**
+- Python
+- Machine Learning
+- Deep Learning
+- LangChain
+- LangGraph
+- RAG Systems
+- AWS
+- FastAPI
+- Docker
+
+---
+
+## ⭐ Why This Project?
+
+Traditional chatbots generate responses directly from the language model.
+
+This project demonstrates how modern AI systems can:
+
+- Reason through complex problems
+- Use external tools
+- Maintain memory
+- Perform research
+- Generate grounded responses
+
+making them significantly more powerful than standard conversational AI systems.
+
+---
+
+## 📜 License
+
+MIT License
+
+Feel free to use, modify, and build upon this project.
