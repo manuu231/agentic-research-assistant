@@ -169,12 +169,6 @@ This project showcases:
 
 ---
 
-## 📸 Demo
-
-<img width="900" alt="demo" src="demo.png">
-
----
-
 ## 👩‍💻 Author
 
 ### Manpreet Kaur Mahal
